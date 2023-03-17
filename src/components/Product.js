@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 
 function Product() {
     const [product,setProduct] = useState({});
+    const [isProductAdded, setIsProductAdded] = useState(false);
     const {id} = useParams();
     const dispatch = useDispatch();
 
@@ -43,13 +44,21 @@ function Product() {
                             </div>
                             <div className='product_add_to_cart'>
                                 <button className='btn btn-info' 
-                                onClick={()=>{dispatch(addToCart(product))}}
-                                >Add to Cart</button>
+                                onClick={()=>{
+                                    dispatch(addToCart(product))
+                                    setIsProductAdded(true);
+                                }}
+                                >{isProductAdded ? "Added" : "Add to Cart" }</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            ):<p>Loading...</p>
+            ):(
+                <div>
+                    <img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952xb5sn40k1p8tj7o0q6xtszdgavkzb2d4mf28u2kd&rid=200w.gif&ct=g"
+                    alt="loading-img" />
+                </div>
+            )
         }
     </div>
   )
